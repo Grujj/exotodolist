@@ -16,6 +16,8 @@ import {
   Modal,
   Pressable
 } from 'react-native';
+import { AddModal } from './components/AddModal';
+import { Task } from './components/Task';
 
 const App = () => {
 
@@ -27,12 +29,6 @@ const App = () => {
 
   const [text, setText] = useState("");
   const [display, setDisplay] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
-
-  const textToDo = "A faire";
-  const textDone = "Fait";
-  const textEdit = "Editer";
-  const textSave = "Sauvegarder";
 
   /**
    * Methode qui gere l edition de tache
@@ -96,60 +92,19 @@ const App = () => {
       <View>
         {tasks.map((task) => {
           return(
-            <View key={task.index}>
-
-              {/* Affichage de la tache */}
-              <TextInput
-                onChangeText={(text) => setText(text)}
-                editable={task.editable}
-              >
-                {task.todo}
-              </TextInput>
-
-              {/* Bouton d edition */}
-              <Button 
-                onPress={() => handleEdit(task)} 
-                /* !task.editable car false par defaut */
-                title={!task.editable ? textEdit : textSave}/>
-
-              {/* Bouton tache faite ou non */}
-              <Button 
-                onPress={() => handlePress(task.index)} 
-                title={task.done ? textDone : textToDo}/>
-
-            </View>
+            <Task 
+              key={task.index}
+              task={task}
+              handleEdit={handleEdit} 
+              handlePress={handlePress}
+              setText={setText}
+              />
           )
         })}
       </View>
 
       {/* Affichage de la modal d ajout */}
-      <View>
-
-        <Modal
-          animationType="slide"
-          visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(!modalVisible);
-          }}>
-
-            {/* Contenu de la Modal */}
-            <View>
-              <Text>Hello world !</Text>
-            </View>
-            <Button
-              onPress={() => {
-                setModalVisible(!modalVisible)
-              }}
-              title="Hide Modal"/>
-
-        </Modal>
-        
-        {/* Ouverture de la Modal */}
-        <Button
-          onPress={() => setModalVisible(true)}
-          title="Open Modal"/>
-
-      </View>
+      <AddModal/>
 
     </View>
   )
