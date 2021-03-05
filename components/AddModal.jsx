@@ -1,9 +1,18 @@
 import React, { useState } from 'react'
-import { View, Text, Modal, Button } from 'react-native'
+import { View, Text, Modal, Button, TextInput } from 'react-native'
 
 export const AddModal = (props) => {
 
     const [modalVisible, setModalVisible] = useState(false);
+    const [text, setText] = useState("");
+
+    const textAddTask = "Ajouter une tâche";
+    const textBack = "Retour";
+    const textSave = "Sauvegarder";
+
+    const handlePress = () => {
+        console.log(text);
+    }
 
     return (
         <View>
@@ -16,21 +25,28 @@ export const AddModal = (props) => {
 
             {/* Contenu de la Modal */}
             <View>
-              <Text>Hello world !</Text>
+                <TextInput
+                    onChangeText={(text) => setText(text)}
+                >
+                    Hello World
+                </TextInput>
+                <Button 
+                    title={textSave}
+                    onPress={handlePress}/>
             </View>
-            
+
             <Button
               onPress={() => {
                 setModalVisible(!modalVisible)
               }}
-              title="Hide Modal"/>
+              title={textBack}/>
 
         </Modal>
         
         {/* Ouverture de la Modal */}
         <Button
           onPress={() => setModalVisible(true)}
-          title="Open Modal"/>
+          title={textAddTask}/>
 
         </View>
     )
