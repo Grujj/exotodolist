@@ -131,22 +131,26 @@ const App = () => {
           onRequestClose={() => {
             setModalVisible(!modalVisible);
           }}>
-          <View>
-            <Text>Hello world !</Text>
-          </View>
-          <Button
-            onPress={() => {
-              setModalVisible(!modalVisible)
-            }}
-            title="Hide Modal"/>
-        </Modal>
 
+            {/* Contenu de la Modal */}
+            <View>
+              <Text>Hello world !</Text>
+            </View>
+            <Button
+              onPress={() => {
+                setModalVisible(!modalVisible)
+              }}
+              title="Hide Modal"/>
+
+        </Modal>
+        
+        {/* Ouverture de la Modal */}
         <Button
           onPress={() => setModalVisible(true)}
           title="Open Modal"/>
 
       </View>
-      
+
     </View>
   )
 }
